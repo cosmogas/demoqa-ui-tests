@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.demoqa'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.1'
+    testImplementation 'com.codeborne:selenide:7.2.1'
+
+    // Allure
+    testImplementation 'io.qameta.allure:allure-selenide:2.25.0'
+    testImplementation 'io.qameta.allure:allure-junit5:2.25.0'
+
+    // Logger
+    testRuntimeOnly 'org.slf4j:slf4j-simple:2.0.12'
+}
+
+test {
+    useJUnitPlatform()
+
+    systemProperty "allure.results.directory", "build/allure-results"
+
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
